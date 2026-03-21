@@ -25,7 +25,7 @@ export const MOCK_ROUTES: Route[] = [
   {
     id: "r1",
     shortName: "101",
-    longName: "Heredia Centro – San Joaquín",
+    longName: "Heredia Centro - San Joaquín",
     type: "bus",
     color: "0EA5E9",
     textColor: "FFFFFF",
@@ -34,7 +34,7 @@ export const MOCK_ROUTES: Route[] = [
   {
     id: "r2",
     shortName: "102",
-    longName: "Heredia – Barva",
+    longName: "Heredia - Barva",
     type: "bus",
     color: "16A34A",
     textColor: "FFFFFF",
@@ -43,7 +43,7 @@ export const MOCK_ROUTES: Route[] = [
   {
     id: "r3",
     shortName: "103",
-    longName: "Heredia – Santo Domingo",
+    longName: "Heredia - Santo Domingo",
     type: "bus",
     color: "F59E0B",
     textColor: "000000",
@@ -52,7 +52,7 @@ export const MOCK_ROUTES: Route[] = [
   {
     id: "r4",
     shortName: "104",
-    longName: "Heredia – Universidad Nacional",
+    longName: "Heredia - Universidad Nacional",
     type: "bus",
     color: "DC2626",
     textColor: "FFFFFF",
@@ -61,7 +61,7 @@ export const MOCK_ROUTES: Route[] = [
   {
     id: "r5",
     shortName: "105",
-    longName: "Heredia Centro – Cariari",
+    longName: "Heredia Centro - Cariari",
     type: "bus",
     color: "2563EB",
     textColor: "FFFFFF",
@@ -195,7 +195,7 @@ export const MOCK_ARRIVALS: Arrival[] = [
 export const MOCK_ALERTS: TransitAlert[] = [
   {
     id: "al1",
-    title: "Desvío por obra – Ruta 101",
+    title: "Desvío por obra - Ruta 101",
     body: "La Ruta 101 está desviada por obras en calle principal. Algunas paradas se encuentran temporalmente fuera de servicio.",
     severity: "warning",
     status: "active",
@@ -206,7 +206,7 @@ export const MOCK_ALERTS: TransitAlert[] = [
   },
   {
     id: "al2",
-    title: "Alta demanda – Universidad",
+    title: "Alta demanda - Universidad",
     body: "Servicio con alta demanda hacia la Universidad Nacional. Espere buses llenos en horas punta.",
     severity: "info",
     status: "active",

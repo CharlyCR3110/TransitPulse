@@ -2,7 +2,7 @@
 
 A **mobile-first** public transit information app built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**.
 
-Designed for commuters checking transit info on the go – one-hand use, quick-glance cards, large tap targets, and clear information hierarchy.
+Designed for commuters checking transit info on the go - one-hand use, quick-glance cards, large tap targets, and clear information hierarchy.
 
 > **Current state:** Frontend MVP with mock data. Backend integrations are marked with `// TODO` comments throughout the codebase.
 
@@ -55,7 +55,7 @@ npm run lint
 src/
 ├── app/                    # Next.js App Router pages & layouts
 │   ├── layout.tsx          # Root layout: viewport meta, BottomNav, font
-│   ├── page.tsx            # Home – next arrivals, alerts, nearby stops
+│   ├── page.tsx            # Home - next arrivals, alerts, nearby stops
 │   ├── routes/
 │   │   └── page.tsx        # Trip planner + all routes & stops
 │   ├── alerts/

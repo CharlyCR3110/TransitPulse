@@ -14,7 +14,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Alert banner – always at the very top if there are active alerts */}
+      {/* Alert banner - always at the very top if there are active alerts */}
       <AlertBanner alerts={activeAlerts} />
 
       {/* Scrollable content */}
@@ -62,13 +62,12 @@ export default function HomePage() {
               {activeAlerts.slice(0, 2).map((alert) => (
                 <div key={alert.id} className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden shadow-sm">
                   <div
-                    className={`flex items-start gap-3 px-4 py-3.5 border-l-4 ${
-                      alert.severity === "critical"
+                    className={`flex items-start gap-3 px-4 py-3.5 border-l-4 ${alert.severity === "critical"
                         ? "border-red-500 bg-red-50 dark:bg-red-950/30"
                         : alert.severity === "warning"
-                        ? "border-amber-500 bg-amber-50 dark:bg-amber-950/30"
-                        : "border-blue-400 bg-blue-50 dark:bg-blue-950/30"
-                    }`}
+                          ? "border-amber-500 bg-amber-50 dark:bg-amber-950/30"
+                          : "border-blue-400 bg-blue-50 dark:bg-blue-950/30"
+                      }`}
                   >
                     <span className="text-lg flex-shrink-0 mt-0.5">
                       {alert.severity === "critical" ? "🚨" : alert.severity === "warning" ? "⚠️" : "ℹ️"}
