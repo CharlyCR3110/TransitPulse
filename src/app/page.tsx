@@ -5,14 +5,15 @@ import { getUpcomingArrivals } from "@/services/arrivals.service";
 import { getAlerts } from "@/services/alerts.service";
 import { getNearbyStops } from "@/services/stops.service";
 import AlertBanner from "@/components/alerts/AlertBanner";
-import { Hand, AlertTriangle, Info, Map } from "lucide-react";
 import ArrivalCard from "@/components/arrivals/ArrivalCard";
 import StopCard from "@/components/stops/StopCard";
 import Link from "next/link";
 import { Arrival, Stop, TransitAlert } from "@/types/transit";
+import { useT } from "@/lib/i18n-client";
 
 
 export default function HomePage() {
+  const t = useT();
   const [temporaryDate, setDate] = React.useState(new Date("2026-01-01T00:00:00").toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }));
   const [upcomingArrivals, setUpcomingArrivals] = React.useState<Arrival[]>([]);
   const [alerts, setAlerts] = React.useState<TransitAlert[]>([]);
@@ -34,6 +35,8 @@ export default function HomePage() {
     })();
   }, []);
 
+  const activeAlertCount = alerts.filter((a) => a.status === "active").length;
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Alert banner - always at the very top if there are active alerts */}
@@ -49,10 +52,11 @@ export default function HomePage() {
               <div className="flex items-center gap-2 mt-1">
                 <div className="min-w-0">
                   <p className="text-lg font-bold text-slate-900 dark:text-white truncate">
-                    {nearbyStops[0]?.name ? `${nearbyStops[0].name} (Current)` : 'Heredia Centro (Current)'}
+                    {/* Note: Using Heredia Centro as fallback, but this should not be hardcoded */}
+                    {nearbyStops[0]?.name ? `${nearbyStops[0].name} (${t("home.current")})` : "Heredia Centro (Current)"}
                   </p>
                   <div className="mt-0.5">
-                    <Link href="/stops" className="text-sm text-blue-600 dark:text-blue-400">Change</Link>
+                    <Link href="/stops" className="text-sm text-blue-600 dark:text-blue-400">{t("home.change")}</Link>
                   </div>
                 </div>
               </div>
@@ -61,7 +65,7 @@ export default function HomePage() {
             {alerts.length > 0 && (
               <Link href="/alerts" className="ml-auto self-start inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-amber-300 bg-amber-50 text-amber-800 dark:bg-amber-900/20 dark:border-amber-700">
                 <span className="text-sm">⚠️</span>
-                <span className="text-sm font-medium">{alerts.filter(a => a.status === 'active').length} active alert{alerts.filter(a => a.status === 'active').length > 1 ? 's' : ''}</span>
+                <span className="text-sm font-medium">{activeAlertCount} {activeAlertCount === 1 ? t("home.activeAlert") : t("home.activeAlerts")}</span>
               </Link>
             )}
           </div>
@@ -71,7 +75,7 @@ export default function HomePage() {
         <section className="px-4 mt-3" aria-labelledby="arrivals-heading">
           <div className="flex items-center justify-between mb-2">
             <h2 id="arrivals-heading" className="text-base font-bold text-slate-800 dark:text-slate-100">
-              Next Arrivals
+              {t("home.nextArrivals")}
             </h2>
           </div>
           <div className="space-y-2">
@@ -79,7 +83,7 @@ export default function HomePage() {
               <ArrivalCard key={arrival.id} arrival={arrival} />
             ))}
             {upcomingArrivals.length === 0 && (
-              <p className="text-sm text-slate-500">No imminent arrivals.</p>
+              <p className="text-sm text-slate-500">{t("home.noImminentArrivals")}</p>
             )}
           </div>
         </section>
@@ -89,9 +93,9 @@ export default function HomePage() {
           <section className="px-4 mt-4" aria-labelledby="alerts-heading">
             <div className="flex items-center justify-between mb-2">
               <h2 id="alerts-heading" className="text-base font-bold text-slate-800 dark:text-slate-100">
-                Important Alerts
+                {t("home.importantAlerts")}
               </h2>
-              <Link href="/alerts" className="text-sm text-blue-600 dark:text-blue-400">See all</Link>
+              <Link href="/alerts" className="text-sm text-blue-600 dark:text-blue-400">{t("home.seeAll")}</Link>
             </div>
             <div className="space-y-2">
               {alerts.slice(0, 2).map((alert) => (
@@ -107,7 +111,7 @@ export default function HomePage() {
         <section className="px-4 mt-5" aria-label="Quick actions">
           <div className="space-y-3">
             <Link href="/routes" className="block bg-blue-600 text-white rounded-2xl px-4 py-3 text-center font-bold">
-              Plan trip
+              {t("trips.planner.plan")}
             </Link>
           </div>
         </section>
@@ -116,16 +120,16 @@ export default function HomePage() {
         <section className="px-4 mt-5" aria-labelledby="stops-heading">
           <div className="flex items-center justify-between mb-2">
             <h2 id="stops-heading" className="text-base font-bold text-slate-800 dark:text-slate-100">
-              Nearby Stops
+              {t("home.nearbyStops")}
             </h2>
-            <Link href="/routes" className="text-sm text-blue-600 dark:text-blue-400">See all</Link>
+            <Link href="/routes" className="text-sm text-blue-600 dark:text-blue-400">{t("home.seeAll")}</Link>
           </div>
           <div className="space-y-2">
             {nearbyStops.slice(0, 3).map((stop) => (
               <StopCard key={stop.id} stop={stop} />
             ))}
             {nearbyStops.length === 0 && (
-              <p className="text-sm text-slate-500">No nearby stops found.</p>
+              <p className="text-sm text-slate-500">{t("home.noNearbyStopsFound")}</p>
             )}
           </div>
         </section>

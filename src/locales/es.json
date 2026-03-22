@@ -136,6 +136,18 @@
       "notifications": "Notificaciones"
     }
   },
+  "home": {
+    "current": "Actual",
+    "change": "Cambiar",
+    "activeAlert": "alerta activa",
+    "activeAlerts": "alertas activas",
+    "nextArrivals": "Próximas llegadas",
+    "noImminentArrivals": "No hay llegadas inminentes.",
+    "importantAlerts": "Alertas importantes",
+    "seeAll": "Ver todo",
+    "nearbyStops": "Paradas cercanas",
+    "noNearbyStopsFound": "No se encontraron paradas cercanas."
+  },
   "routes": {
     "all": "Todas las rutas"
   },
@@ -162,7 +174,8 @@
   "status": {
     "onTime": "A tiempo",
     "delayed": "Retrasado",
-    "cancelled": "Cancelado"
+    "cancelled": "Cancelado",
+    "arriving": "Llegando"
   },
   "onTime": "A tiempo",
   "delayed": "Retrasado",

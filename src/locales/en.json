@@ -104,5 +104,17 @@
       "preferredModes": "Preferred modes",
       "notifications": "Notifications"
     }
+  },
+  "home": {
+    "current": "Current",
+    "change": "Change",
+    "activeAlert": "active alert",
+    "activeAlerts": "active alerts",
+    "nextArrivals": "Next Arrivals",
+    "noImminentArrivals": "No imminent arrivals.",
+    "importantAlerts": "Important Alerts",
+    "seeAll": "See all",
+    "nearbyStops": "Nearby Stops",
+    "noNearbyStopsFound": "No nearby stops found."
   }
 }
