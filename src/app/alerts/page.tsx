@@ -1,5 +1,3 @@
-"use client";
-
 import { MOCK_ALERTS } from "@/data/mock";
 import AlertCard from "@/components/alerts/AlertCard";
 import EmptyState from "@/components/ui/EmptyState";
@@ -38,9 +36,9 @@ export default function AlertsPage() {
           <h2 id="active-alerts-heading" className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3">
             Active Now · {activeAlerts.length}
           </h2>
-          {activeAlerts.length === 0 ? (
+          {true ? (
             <EmptyState
-              icon={<CheckCircle size={36} className="text-green-600" />}
+              icon="check"
               title="No active alerts"
               description="All services are running normally."
             />
