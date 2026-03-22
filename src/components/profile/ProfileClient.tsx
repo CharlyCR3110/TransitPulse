@@ -55,13 +55,8 @@ export default function ProfileClient({ profile }: { profile: UserProfile }) {
             <p className="text-sm text-slate-400 px-1">No favorites yet.</p>
           ) : (
             <div className="space-y-2.5">
-              {profile.favoriteStops.map(({ stop, alias }) => (
+              {profile.favoriteStops.map(({ stop }) => (
                 <div key={stop.id} className="relative">
-                  {alias && (
-                    <span className="absolute top-3 right-4 text-xs font-medium text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
-                      {alias}
-                    </span>
-                  )}
                   <StopCard stop={stop} />
                 </div>
               ))}

@@ -43,7 +43,7 @@ export interface Arrival {
   route: Route;
   headsign: string;         // Destination displayed on the vehicle
   scheduledTime: string;    // ISO-8601
-  estimatedTime: string;    // ISO-8601 – TODO: populate from real-time feed
+  estimatedTime: string;    // ISO-8601 - TODO: populate from real-time feed
   minutesAway: number;
   status: ArrivalStatus;
   stopId: string;
@@ -63,7 +63,7 @@ export interface TransitAlert {
   affectedRoutes: Route[];
   affectedStops?: Stop[];
   startTime: string;        // ISO-8601
-  endTime?: string;         // ISO-8601 – undefined means "until further notice"
+  endTime?: string;         // ISO-8601 - undefined means "until further notice"
   url?: string;             // Link to more details
 }
 
@@ -98,7 +98,6 @@ export interface Trip {
 
 export interface FavoriteStop {
   stop: Stop;
-  alias?: string;           // Custom name, e.g. "Home Stop"
 }
 
 export interface FavoriteRoute {

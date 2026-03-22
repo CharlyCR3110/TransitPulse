@@ -284,8 +284,8 @@ export const MOCK_USER_PROFILE: UserProfile = {
   id: "u1",
   displayName: "Usuario Heredia",
   favoriteStops: [
-    { stop: MOCK_STOPS[0], alias: "Centro" },
-    { stop: MOCK_STOPS[3], alias: "UNI" },
+    { stop: MOCK_STOPS[0] },
+    { stop: MOCK_STOPS[3] },
   ],
   favoriteRoutes: [
     { route: MOCK_ROUTES[0] },
