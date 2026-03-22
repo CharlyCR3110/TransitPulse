@@ -18,6 +18,11 @@ export default function HomePage() {
   const [alerts, setAlerts] = React.useState<TransitAlert[]>([]);
   const [nearbyStops, setNearbyStops] = React.useState<Stop[]>([]);
 
+  const refreshArrivals = React.useCallback(async () => {
+    const arr = await getUpcomingArrivals(4);
+    setUpcomingArrivals(arr);
+  }, []);
+
   React.useEffect(() => {
     (async () => {
       const arr = await getUpcomingArrivals(4);
@@ -36,135 +41,93 @@ export default function HomePage() {
 
       {/* Scrollable content */}
       <main className="flex-1 overflow-y-auto pb-24">
-        {/* Greeting */}
+        {/* 1) Location / Selected stop - top decision */}
         <section className="px-4 pt-5 pb-2">
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            Good ride!
-            <Hand className="h-6 w-6" />
-          </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-            Central Station · {temporaryDate}
-          </p>
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-sm text-slate-500 dark:text-slate-400">{temporaryDate}</p>
+              <div className="flex items-center gap-2 mt-1">
+                <div className="min-w-0">
+                  <p className="text-lg font-bold text-slate-900 dark:text-white truncate">
+                    {nearbyStops[0]?.name ? `${nearbyStops[0].name} (Current)` : 'Heredia Centro (Current)'}
+                  </p>
+                  <div className="mt-0.5">
+                    <Link href="/stops" className="text-sm text-blue-600 dark:text-blue-400">Change</Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* compact alert summary */}
+            {alerts.length > 0 && (
+              <Link href="/alerts" className="ml-auto self-start inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-amber-300 bg-amber-50 text-amber-800 dark:bg-amber-900/20 dark:border-amber-700">
+                <span className="text-sm">⚠️</span>
+                <span className="text-sm font-medium">{alerts.filter(a => a.status === 'active').length} active alert{alerts.filter(a => a.status === 'active').length > 1 ? 's' : ''}</span>
+              </Link>
+            )}
+          </div>
         </section>
 
-        {/* Next arrivals */}
-        <section className="px-4 mt-5" aria-labelledby="arrivals-heading">
-          <div className="flex items-center justify-between mb-3">
+        {/* 2) Next arrivals - concise list (2-4) */}
+        <section className="px-4 mt-3" aria-labelledby="arrivals-heading">
+          <div className="flex items-center justify-between mb-2">
             <h2 id="arrivals-heading" className="text-base font-bold text-slate-800 dark:text-slate-100">
               Next Arrivals
             </h2>
-            <span className="text-xs text-slate-400 dark:text-slate-500">Central Station</span>
           </div>
-          <div className="space-y-2.5">
-            {upcomingArrivals.map((arrival) => (
+          <div className="space-y-2">
+            {upcomingArrivals.slice(0, 4).map((arrival) => (
               <ArrivalCard key={arrival.id} arrival={arrival} />
             ))}
+            {upcomingArrivals.length === 0 && (
+              <p className="text-sm text-slate-500">No imminent arrivals.</p>
+            )}
           </div>
         </section>
 
-        {/* Active alerts summary */}
+        {/* 3) Critical / top alerts (show 1-2) */}
         {alerts.length > 0 && (
-          <section className="px-4 mt-6" aria-labelledby="alerts-heading">
-            <div className="flex items-center justify-between mb-3">
+          <section className="px-4 mt-4" aria-labelledby="alerts-heading">
+            <div className="flex items-center justify-between mb-2">
               <h2 id="alerts-heading" className="text-base font-bold text-slate-800 dark:text-slate-100">
-                Active Alerts
+                Important Alerts
               </h2>
-              <Link
-                href="/alerts"
-                className="text-sm font-medium text-blue-600 dark:text-blue-400 min-h-[44px] flex items-center"
-              >
-                See all →
-              </Link>
+              <Link href="/alerts" className="text-sm text-blue-600 dark:text-blue-400">See all</Link>
             </div>
-            <div className="space-y-2.5">
+            <div className="space-y-2">
               {alerts.slice(0, 2).map((alert) => (
-                <div key={alert.id} className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden shadow-sm">
-                  <div
-                    className={`flex items-start gap-3 px-4 py-3.5 border-l-4 ${alert.severity === "critical"
-                      ? "border-red-500 bg-red-50 dark:bg-red-950/30"
-                      : alert.severity === "warning"
-                        ? "border-amber-500 bg-amber-50 dark:bg-amber-950/30"
-                        : "border-blue-400 bg-blue-50 dark:bg-blue-950/30"
-                      }`}
-                  >
-                    <span className="text-lg flex-shrink-0 mt-0.5">
-                      {alert.severity === "critical" ? (
-                        <AlertTriangle size={18} />
-                      ) : alert.severity === "warning" ? (
-                        <AlertTriangle size={18} />
-                      ) : (
-                        <Info size={18} />
-                      )}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-slate-900 dark:text-white leading-tight">
-                        {alert.title}
-                      </p>
-                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 line-clamp-2">
-                        {alert.body}
-                      </p>
-                      {alert.affectedRoutes.length > 0 && (
-                        <div className="flex gap-1.5 mt-2 flex-wrap">
-                          {alert.affectedRoutes.map((r) => (
-                            <span
-                              key={r.id}
-                              className="px-1.5 py-0.5 rounded text-[11px] font-bold"
-                              style={{ backgroundColor: `#${r.color}`, color: `#${r.textColor}` }}
-                            >
-                              {r.shortName}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
+                <div key={alert.id} className="rounded-2xl overflow-hidden">
+                  <AlertBanner alerts={[alert]} />
                 </div>
               ))}
-              {alerts.length > 2 && (
-                <Link
-                  href="/alerts"
-                  className="block text-center py-3 text-sm font-medium text-blue-600 dark:text-blue-400"
-                >
-                  +{alerts.length - 2} more alerts
-                </Link>
-              )}
             </div>
           </section>
         )}
 
-        {/* Nearby stops */}
-        <section className="px-4 mt-6" aria-labelledby="stops-heading">
-          <div className="flex items-center justify-between mb-3">
-            <h2 id="stops-heading" className="text-base font-bold text-slate-800 dark:text-slate-100">
-              Nearby Stops
-            </h2>
-            <Link
-              href="/routes"
-              className="text-sm font-medium text-blue-600 dark:text-blue-400 min-h-[44px] flex items-center"
-            >
-              Map →
+        {/* 4) Quick actions - decisions the user can take next */}
+        <section className="px-4 mt-5" aria-label="Quick actions">
+          <div className="space-y-3">
+            <Link href="/routes" className="block bg-blue-600 text-white rounded-2xl px-4 py-3 text-center font-bold">
+              Plan trip
             </Link>
-          </div>
-          <div className="space-y-2.5">
-            {nearbyStops.map((stop) => (
-              <StopCard key={stop.id} stop={stop} />
-            ))}
           </div>
         </section>
 
-        {/* Trip planner CTA */}
-        <section className="px-4 mt-6">
-          <Link
-            href="/routes"
-            className="flex items-center justify-between bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-2xl px-5 py-4 min-h-[64px] transition-colors active:scale-[0.98]"
-            aria-label="Plan a trip"
-          >
-            <div>
-              <p className="font-bold text-base leading-tight">Plan a Trip</p>
-              <p className="text-sm text-blue-100 mt-0.5">Find the best route →</p>
-            </div>
-            <span className="text-3xl" aria-hidden="true"><Map className="h-8 w-8" /></span>
-          </Link>
+        {/* 5) Nearby stops - short list (3-5) */}
+        <section className="px-4 mt-5" aria-labelledby="stops-heading">
+          <div className="flex items-center justify-between mb-2">
+            <h2 id="stops-heading" className="text-base font-bold text-slate-800 dark:text-slate-100">
+              Nearby Stops
+            </h2>
+            <Link href="/routes" className="text-sm text-blue-600 dark:text-blue-400">See all</Link>
+          </div>
+          <div className="space-y-2">
+            {nearbyStops.slice(0, 3).map((stop) => (
+              <StopCard key={stop.id} stop={stop} />
+            ))}
+            {nearbyStops.length === 0 && (
+              <p className="text-sm text-slate-500">No nearby stops found.</p>
+            )}
+          </div>
         </section>
       </main>
     </div>
