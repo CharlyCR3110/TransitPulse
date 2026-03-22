@@ -2,6 +2,7 @@
   "nav": {
     "home": "Inicio",
     "routes": "Rutas",
+    "alerts": "Alertas",
     "arrivals": "Llegadas",
     "profile": "Perfil",
     "stops": "Paradas",
@@ -9,23 +10,89 @@
   },
   "alerts": {
     "banner": {
-      "title": "Alertas de servicio",
-      "subtitle": "Revisa las interrupciones actuales"
+      "error": "Algo salió mal",
+      "errorDescription": "No pudimos cargar estos datos. Inténtalo de nuevo.",
+      "subtitle": "Consulta las interrupciones actuales"
     },
     "card": {
+      "tryAgain": "Intentar de nuevo",
       "more": "Ver detalles",
-      "none": "Sin alertas"
+      "none": "No hay alertas"
+    },
+    "labels": {
+      "route": "Ruta",
+      "destination": "Destino",
+      "status": "Estado",
+      "next": "Siguiente",
+      "away": "de distancia"
+    },
+    "page": {
+      "title": "Alertas",
+      "subtitle": "Interrupciones del servicio y avisos"
+    },
+    "activeNow": "Activas ahora",
+    "upcoming": "Próximas",
+    "resolved": "Resueltas",
+    "stayUpdated": "Mantente informado",
+    "enableNotifications": "Activar notificaciones (próximamente)",
+    "noActiveTitle": "No hay alertas activas",
+    "noActiveDescription": "Todos los servicios están funcionando con normalidad.",
+    "status": {
+      "active": "Activa",
+      "upcoming": "Próxima"
     }
   },
-  "arrivals": {
-    "card": {
-      "next": "Próximas llegadas",
-      "noData": "Sin datos de llegada"
-    }
-  },
+  "arriving": "Llegando",
   "stops": {
     "card": {
       "nearby": "Paradas cercanas"
+    },
+    "accessible": "Accesible",
+    "stopPrefix": "Parada #",
+    "stops": {
+      "accessible": "Accesible",
+      "stopPrefix": "Parada #",
+      "card": {
+        "nearby": "Paradas cercanas"
+      }
+    },
+    "trips": {
+      "planner": {
+        "title": "Planificador de viajes",
+        "from": "Desde",
+        "to": "Hasta",
+        "plan": "Planificar viaje",
+        "placeholders": {
+          "origin": "Ubicación actual o nombre de la parada",
+          "destination": "Parada de destino o dirección"
+        },
+        "search": "Buscar rutas",
+        "noResults": "No se encontraron rutas"
+      },
+      "noResultsDescription": "Prueba con otros nombres de paradas. Actualmente se muestran datos simulados.",
+      "card": {
+        "duration": "Duración",
+        "eta": "Hora estimada"
+      }
+    },
+    "profile": {
+      "title": "Perfil",
+      "signedInAs": "Conectado como",
+      "signInTitle": "Inicia sesión para sincronizar tus preferencias",
+      "signInDesc": "Guarda favoritos, recibe alertas personalizadas y sigue tus viajes en todos tus dispositivos.",
+      "notSignedIn": "No has iniciado sesión",
+      "signInButton": "Iniciar sesión (próximamente)",
+      "favoriteStops": "Paradas favoritas",
+      "favoriteRoutes": "Rutas favoritas",
+      "preferences": "Preferencias",
+      "noFavorites": "Aún no hay favoritos.",
+      "on": "Activado",
+      "off": "Desactivado",
+      "preferenceLabels": {
+        "accessibleRoutesOnly": "Solo rutas accesibles",
+        "preferredModes": "Modos preferidos",
+        "notifications": "Notificaciones"
+      }
     }
   },
   "trips": {
@@ -33,7 +100,14 @@
       "title": "Planificador de viajes",
       "from": "Desde",
       "to": "Hasta",
-      "plan": "Planificar"
+      "plan": "Planificar viaje",
+      "placeholders": {
+        "origin": "Ubicación actual o nombre de la parada",
+        "destination": "Parada de destino o dirección"
+      },
+      "search": "Buscar rutas",
+      "noResults": "No se encontraron rutas",
+      "noResultsDescription": "Prueba con otros nombres de paradas. Actualmente se muestran datos simulados."
     },
     "card": {
       "duration": "Duración",
@@ -42,27 +116,49 @@
   },
   "profile": {
     "title": "Perfil",
-    "signedInAs": "Conectado como"
+    "signedInAs": "Conectado como",
+    "signInTitle": "Inicia sesión para sincronizar tus preferencias",
+    "signInDesc": "Guarda favoritos, recibe alertas personalizadas y sigue tus viajes en todos tus dispositivos.",
+    "notSignedIn": "No has iniciado sesión",
+    "signInButton": "Iniciar sesión (próximamente)",
+    "favoriteStops": "Paradas favoritas",
+    "favoriteRoutes": "Rutas favoritas",
+    "preferences": "Preferencias",
+    "noFavorites": "Aún no hay favoritos.",
+    "on": "Activado",
+    "off": "Desactivado",
+    "preferenceLabels": {
+      "accessibleRoutesOnly": "Solo rutas accesibles",
+      "preferredModes": "Modos preferidos",
+      "notifications": "Notificaciones"
+    }
   },
   "ui": {
     "emptyState": "No hay elementos para mostrar",
     "loading": "Cargando...",
-    "error": "Algo salió mal"
+    "error": "Algo salió mal",
+    "errorTitle": "Algo salió mal",
+    "errorDescription": "No pudimos cargar estos datos. Inténtalo de nuevo."
   },
   "buttons": {
     "search": "Buscar",
     "refresh": "Actualizar",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "tryAgain": "Intentar de nuevo"
   },
   "labels": {
     "route": "Ruta",
     "destination": "Destino",
     "status": "Estado",
-    "next": "Próximo"
+    "next": "Siguiente",
+    "away": "de distancia"
   },
   "status": {
     "onTime": "A tiempo",
     "delayed": "Retrasado",
     "cancelled": "Cancelado"
-  }
+  },
+  "onTime": "A tiempo",
+  "delayed": "Retrasado",
+  "cancelled": "Cancelado"
 }

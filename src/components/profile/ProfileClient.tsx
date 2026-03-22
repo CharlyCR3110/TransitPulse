@@ -5,8 +5,10 @@ import type { UserProfile } from "@/types/transit";
 import RouteChip from "@/components/ui/RouteChip";
 import StopCard from "@/components/stops/StopCard";
 import { Bus, User, Lock, Accessibility, Bell } from "lucide-react";
+import { useT } from "@/lib/i18n-client";
 
 export default function ProfileClient({ profile }: { profile: UserProfile }) {
+  const t = useT();
   return (
     <div className="flex flex-col min-h-screen">
       {/* Page header / hero */}
@@ -21,7 +23,7 @@ export default function ProfileClient({ profile }: { profile: UserProfile }) {
             {profile.email ? (
               <p className="text-sm text-blue-100 mt-0.5">{profile.email}</p>
             ) : (
-              <p className="text-sm text-blue-200 mt-0.5">Not signed in</p>
+              <p className="text-sm text-blue-200 mt-0.5">{t("profile.notSignedIn")}</p>
             )}
           </div>
         </div>
@@ -32,16 +34,16 @@ export default function ProfileClient({ profile }: { profile: UserProfile }) {
         <div className="px-4 pt-5">
           <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-100 dark:border-slate-700 shadow-sm">
             <p className="text-sm text-slate-700 dark:text-slate-300 font-medium flex items-center gap-2">
-              <Lock className="h-4 w-4" /> Sign in to sync your preferences
+              <Lock className="h-4 w-4" /> {t("profile.signInTitle")}
             </p>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Save favorites, get personalized alerts, and track your trips across devices.
+              {t("profile.signInDesc")}
             </p>
             <button
               className="mt-3 w-full bg-blue-600 text-white font-semibold text-sm rounded-xl py-3 min-h-[44px] active:scale-[0.98] transition-transform"
               disabled
             >
-              Sign In (coming soon)
+              {t("profile.signInButton")}
             </button>
           </div>
         </div>
@@ -49,10 +51,10 @@ export default function ProfileClient({ profile }: { profile: UserProfile }) {
         {/* Favorite stops */}
         <section className="px-4 mt-6" aria-labelledby="fav-stops-heading">
           <h2 id="fav-stops-heading" className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3">
-            Favorite Stops
+            {t("profile.favoriteStops")}
           </h2>
           {profile.favoriteStops.length === 0 ? (
-            <p className="text-sm text-slate-400 px-1">No favorites yet.</p>
+            <p className="text-sm text-slate-400 px-1">{t("profile.noFavorites")}</p>
           ) : (
             <div className="space-y-2.5">
               {profile.favoriteStops.map(({ stop }) => (
@@ -67,10 +69,10 @@ export default function ProfileClient({ profile }: { profile: UserProfile }) {
         {/* Favorite routes */}
         <section className="px-4 mt-6" aria-labelledby="fav-routes-heading">
           <h2 id="fav-routes-heading" className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3">
-            Favorite Routes
+            {t("profile.favoriteRoutes")}
           </h2>
           {profile.favoriteRoutes.length === 0 ? (
-            <p className="text-sm text-slate-400 px-1">No favorites yet.</p>
+            <p className="text-sm text-slate-400 px-1">{t("profile.noFavorites")}</p>
           ) : (
             <div className="flex flex-wrap gap-2">
               {profile.favoriteRoutes.map(({ route }) => (
@@ -91,24 +93,24 @@ export default function ProfileClient({ profile }: { profile: UserProfile }) {
         {/* Preferences */}
         <section className="px-4 mt-6" aria-labelledby="prefs-heading">
           <h2 id="prefs-heading" className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3">
-            Preferences
+            {t("profile.preferences")}
           </h2>
           <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm divide-y divide-slate-100 dark:divide-slate-700">
             <PreferenceRow
-              label="Accessible routes only"
-              value={profile.preferAccessible ? "On" : "Off"}
+              label={t("profile.preferenceLabels.accessibleRoutesOnly")}
+              value={profile.preferAccessible ? t("profile.on") : t("profile.off")}
               icon={<Accessibility size={18} />}
             />
             <PreferenceRow
-              label="Preferred modes"
+              label={t("profile.preferenceLabels.preferredModes")}
               value={profile.preferredModes
                 .map((m) => m.charAt(0).toUpperCase() + m.slice(1))
                 .join(", ")}
               icon={<Bus size={16} />}
             />
             <PreferenceRow
-              label="Notifications"
-              value={profile.notificationsEnabled ? "On" : "Off"}
+              label={t("profile.preferenceLabels.notifications")}
+              value={profile.notificationsEnabled ? t("profile.on") : t("profile.off")}
               icon={<Bell size={18} />}
             />
           </div>

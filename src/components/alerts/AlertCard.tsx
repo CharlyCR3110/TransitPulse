@@ -3,6 +3,7 @@
 import type { TransitAlert } from "@/types/transit";
 import { alertSeverityClasses, formatTime, formatRelativeDay } from "@/lib/utils";
 import { AlertTriangle, Info } from "lucide-react";
+import { useT } from "@/lib/i18n-client";
 
 interface AlertCardProps {
   alert: TransitAlert;
@@ -11,6 +12,7 @@ interface AlertCardProps {
 
 
 export default function AlertCard({ alert, compact = false }: AlertCardProps) {
+  const t = useT();
   const classes = alertSeverityClasses(alert.severity);
 
   return (
@@ -39,7 +41,7 @@ export default function AlertCard({ alert, compact = false }: AlertCardProps) {
           )}
         </div>
         {/* Status pill */}
-        <StatusPill status={alert.status} />
+        <StatusPill status={alert.status} t={t} />
       </div>
 
       {/* Affected routes */}
@@ -66,7 +68,7 @@ export default function AlertCard({ alert, compact = false }: AlertCardProps) {
   );
 }
 
-function StatusPill({ status }: { status: TransitAlert["status"] }) {
+function StatusPill({ status, t }: { status: TransitAlert["status"]; t: (k: string) => string }) {
   if (status === "resolved") return null;
   return (
     <span
@@ -75,7 +77,7 @@ function StatusPill({ status }: { status: TransitAlert["status"] }) {
         : "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
         }`}
     >
-      {status === "active" ? "Active" : "Upcoming"}
+      {status === "active" ? t("alerts.status.active") : t("alerts.status.upcoming")}
     </span>
   );
 }

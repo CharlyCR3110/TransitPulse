@@ -1,17 +1,20 @@
 "use client";
 
+import { useT } from "@/lib/i18n-client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const TABS = [
-  { href: "/", label: "Home", icon: HomeIcon },
-  { href: "/routes", label: "Routes", icon: MapIcon },
-  { href: "/alerts", label: "Alerts", icon: BellIcon },
-  { href: "/profile", label: "Profile", icon: PersonIcon },
-] as const;
 
 export default function BottomNav() {
   const pathname = usePathname();
+  const t = useT();
+
+  const TABS = [
+    { href: "/", label: t("nav.home"), icon: HomeIcon },
+    { href: "/routes", label: t("nav.routes"), icon: MapIcon },
+    { href: "/alerts", label: t("nav.alerts"), icon: BellIcon },
+    { href: "/profile", label: t("nav.profile"), icon: PersonIcon },
+  ] as const;
 
   return (
     <nav
@@ -25,11 +28,10 @@ export default function BottomNav() {
             <li key={href} className="flex-1">
               <Link
                 href={href}
-                className={`flex flex-col items-center justify-center gap-0.5 py-2 min-h-[56px] w-full transition-colors ${
-                  active
-                    ? "text-blue-600 dark:text-blue-400"
-                    : "text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
-                }`}
+                className={`flex flex-col items-center justify-center gap-0.5 py-2 min-h-[56px] w-full transition-colors ${active
+                  ? "text-blue-600 dark:text-blue-400"
+                  : "text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
+                  }`}
                 aria-current={active ? "page" : undefined}
               >
                 <Icon

@@ -2,38 +2,78 @@
   "nav": {
     "home": "Home",
     "routes": "Routes",
+    "alerts": "Alerts",
     "arrivals": "Arrivals",
     "profile": "Profile",
     "stops": "Stops",
     "trips": "Trips"
   },
+  "ui": {
+    "emptyState": "No items to show",
+    "loading": "Loading...",
+    "errorTitle": "Something went wrong",
+    "errorDescription": "We couldn't load this data. Please try again."
+  },
+  "buttons": {
+    "search": "Search",
+    "refresh": "Refresh",
+    "close": "Close",
+    "tryAgain": "Try again"
+  },
+  "labels": {
+    "route": "Route",
+    "destination": "Destination",
+    "status": "Status",
+    "next": "Next",
+    "away": "away"
+  },
+  "status": {
+    "arriving": "Arriving",
+    "onTime": "On time",
+    "delayed": "Delayed",
+    "cancelled": "Cancelled",
+    "active": "Active",
+    "upcoming": "Upcoming"
+  },
   "alerts": {
     "banner": {
-      "title": "Service Alerts",
       "subtitle": "Check current disruptions"
     },
     "card": {
       "more": "See details",
       "none": "No alerts"
-    }
-  },
-  "arrivals": {
-    "card": {
-      "next": "Next arrivals",
-      "noData": "No arrival data"
-    }
+    },
+    "page": {
+      "title": "Alerts",
+      "subtitle": "Service disruptions and notices"
+    },
+    "activeNow": "Active Now",
+    "resolved": "Resolved",
+    "stayUpdated": "Stay updated",
+    "enableNotifications": "Enable Notifications (coming soon)",
+    "noActiveTitle": "No active alerts",
+    "noActiveDescription": "All services are running normally."
   },
   "stops": {
     "card": {
       "nearby": "Nearby stops"
-    }
+    },
+    "accessible": "Accessible",
+    "stopPrefix": "Stop #"
   },
   "trips": {
     "planner": {
       "title": "Trip Planner",
       "from": "From",
       "to": "To",
-      "plan": "Plan trip"
+      "plan": "Plan trip",
+      "placeholders": {
+        "origin": "Current location or stop name",
+        "destination": "Destination stop or address"
+      },
+      "search": "Find Routes",
+      "noResults": "No routes found",
+      "noResultsDescription": "Try different stop names. Currently showing mock data."
     },
     "card": {
       "duration": "Duration",
@@ -42,27 +82,21 @@
   },
   "profile": {
     "title": "Profile",
-    "signedInAs": "Signed in as"
-  },
-  "ui": {
-    "emptyState": "No items to show",
-    "loading": "Loading...",
-    "error": "Something went wrong"
-  },
-  "buttons": {
-    "search": "Search",
-    "refresh": "Refresh",
-    "close": "Close"
-  },
-  "labels": {
-    "route": "Route",
-    "destination": "Destination",
-    "status": "Status",
-    "next": "Next"
-  },
-  "status": {
-    "onTime": "On time",
-    "delayed": "Delayed",
-    "cancelled": "Cancelled"
+    "signedInAs": "Signed in as",
+    "signInTitle": "Sign in to sync your preferences",
+    "signInDesc": "Save favorites, get personalized alerts, and track your trips across devices.",
+    "notSignedIn": "Not signed in",
+    "signInButton": "Sign In (coming soon)",
+    "favoriteStops": "Favorite Stops",
+    "favoriteRoutes": "Favorite Routes",
+    "preferences": "Preferences",
+    "noFavorites": "No favorites yet.",
+    "on": "On",
+    "off": "Off",
+    "preferenceLabels": {
+      "accessibleRoutesOnly": "Accessible routes only",
+      "preferredModes": "Preferred modes",
+      "notifications": "Notifications"
+    }
   }
 }

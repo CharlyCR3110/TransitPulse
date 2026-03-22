@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import en from "../locales/en.json";
 import es from "../locales/es.json";
 
@@ -100,37 +99,11 @@ export function t(key: string, locale: Locale = currentLocale): string {
   return typeof cur === "string" ? cur : key;
 }
 
-/**
- * React hook that returns the current locale and re-renders on locale changes.
- *
- * @returns Current locale
- */
-export function useLocale(): Locale {
-  const [locale, setStateLocale] = useState<Locale>(currentLocale);
-
-  useEffect(() => {
-    return subscribe(setStateLocale);
-  }, []);
-
-  return locale;
-}
-
-/**
- * React hook that returns a translation function bound to the current locale.
- *
- * @returns Translation function
- */
-export function useT(): (key: string) => string {
-  const locale = useLocale();
-  return (key: string) => t(key, locale);
-}
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getLocaleStrings,
   getLocale,
   setLocale,
   t,
-  useLocale,
-  useT,
+  subscribe,
 };

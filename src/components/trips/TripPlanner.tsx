@@ -5,6 +5,7 @@ import type { Trip } from "@/types/transit";
 import { planTrip } from "@/services/trips.service";
 import TripCard from "@/components/trips/TripCard";
 import EmptyState from "@/components/ui/EmptyState";
+import { useT } from "@/lib/i18n-client";
 
 // Uses the trips service to plan trips (currently backed by mock data)
 
@@ -12,6 +13,7 @@ export default function TripPlanner() {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [results, setResults] = useState<Trip[] | null>(null);
+  const t = useT();
 
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
@@ -33,14 +35,14 @@ export default function TripPlanner() {
       <form onSubmit={handleSearch} className="space-y-3" noValidate>
         <div className="relative">
           <label htmlFor="origin" className="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wide">
-            From
+            {t("trips.planner.from")}
           </label>
           <input
             id="origin"
             type="text"
             value={origin}
             onChange={(e) => setOrigin(e.target.value)}
-            placeholder="Current location or stop name"
+            placeholder={t("trips.planner.placeholders.origin")}
             className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-base text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[48px]"
           // TODO: Add autocomplete from stops API
           />
@@ -60,14 +62,14 @@ export default function TripPlanner() {
 
         <div>
           <label htmlFor="destination" className="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wide">
-            To
+            {t("trips.planner.to")}
           </label>
           <input
             id="destination"
             type="text"
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
-            placeholder="Destination stop or address"
+            placeholder={t("trips.planner.placeholders.destination")}
             className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-base text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[48px]"
           // TODO: Add autocomplete from stops API
           />
@@ -78,7 +80,7 @@ export default function TripPlanner() {
           className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-xl py-4 text-base min-h-[52px] transition-colors active:scale-[0.98]"
           disabled={!origin.trim() || !destination.trim()}
         >
-          Find Routes
+          {t("trips.planner.search")}
         </button>
       </form>
 
@@ -86,13 +88,13 @@ export default function TripPlanner() {
       {results !== null && (
         <div className="mt-6">
           <h2 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3">
-            {results.length > 0 ? `${results.length} option${results.length > 1 ? "s" : ""} found` : "No routes found"}
+            {results.length > 0 ? `${results.length} option${results.length > 1 ? "s" : ""} found` : t("trips.planner.noResults")}
           </h2>
           {results.length === 0 ? (
             <EmptyState
               icon="🗺️"
-              title="No routes found"
-              description="Try different stop names. Currently showing mock data."
+              title={t("trips.planner.noResults")}
+              description={t("trips.planner.noResultsDescription")}
             />
           ) : (
             <div className="space-y-3">

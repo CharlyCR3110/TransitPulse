@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className="antialiased bg-slate-50 dark:bg-slate-950 font-sans">
         {/* Max-width container centers content on large screens while keeping mobile full-width */}
         <div className="relative mx-auto max-w-md min-h-screen bg-white dark:bg-slate-900 shadow-sm">
