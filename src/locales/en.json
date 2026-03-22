@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Home",
+    "routes": "Routes",
+    "arrivals": "Arrivals",
+    "profile": "Profile",
+    "stops": "Stops",
+    "trips": "Trips"
+  },
+  "alerts": {
+    "banner": {
+      "title": "Service Alerts",
+      "subtitle": "Check current disruptions"
+    },
+    "card": {
+      "more": "See details",
+      "none": "No alerts"
+    }
+  },
+  "arrivals": {
+    "card": {
+      "next": "Next arrivals",
+      "noData": "No arrival data"
+    }
+  },
+  "stops": {
+    "card": {
+      "nearby": "Nearby stops"
+    }
+  },
+  "trips": {
+    "planner": {
+      "title": "Trip Planner",
+      "from": "From",
+      "to": "To",
+      "plan": "Plan trip"
+    },
+    "card": {
+      "duration": "Duration",
+      "eta": "ETA"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "signedInAs": "Signed in as"
+  },
+  "ui": {
+    "emptyState": "No items to show",
+    "loading": "Loading...",
+    "error": "Something went wrong"
+  },
+  "buttons": {
+    "search": "Search",
+    "refresh": "Refresh",
+    "close": "Close"
+  },
+  "labels": {
+    "route": "Route",
+    "destination": "Destination",
+    "status": "Status",
+    "next": "Next"
+  },
+  "status": {
+    "onTime": "On time",
+    "delayed": "Delayed",
+    "cancelled": "Cancelled"
+  }
+}

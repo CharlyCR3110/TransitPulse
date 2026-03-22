@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "routes": "Rutas",
+    "arrivals": "Llegadas",
+    "profile": "Perfil",
+    "stops": "Paradas",
+    "trips": "Viajes"
+  },
+  "alerts": {
+    "banner": {
+      "title": "Alertas de servicio",
+      "subtitle": "Revisa las interrupciones actuales"
+    },
+    "card": {
+      "more": "Ver detalles",
+      "none": "Sin alertas"
+    }
+  },
+  "arrivals": {
+    "card": {
+      "next": "Próximas llegadas",
+      "noData": "Sin datos de llegada"
+    }
+  },
+  "stops": {
+    "card": {
+      "nearby": "Paradas cercanas"
+    }
+  },
+  "trips": {
+    "planner": {
+      "title": "Planificador de viajes",
+      "from": "Desde",
+      "to": "Hasta",
+      "plan": "Planificar"
+    },
+    "card": {
+      "duration": "Duración",
+      "eta": "Hora estimada"
+    }
+  },
+  "profile": {
+    "title": "Perfil",
+    "signedInAs": "Conectado como"
+  },
+  "ui": {
+    "emptyState": "No hay elementos para mostrar",
+    "loading": "Cargando...",
+    "error": "Algo salió mal"
+  },
+  "buttons": {
+    "search": "Buscar",
+    "refresh": "Actualizar",
+    "close": "Cerrar"
+  },
+  "labels": {
+    "route": "Ruta",
+    "destination": "Destino",
+    "status": "Estado",
+    "next": "Próximo"
+  },
+  "status": {
+    "onTime": "A tiempo",
+    "delayed": "Retrasado",
+    "cancelled": "Cancelado"
+  }
+}
