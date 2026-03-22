@@ -1,28 +1,38 @@
 "use client";
 
-import { MOCK_ARRIVALS, MOCK_ALERTS, MOCK_STOPS } from "@/data/mock";
+import React from "react";
+import { getUpcomingArrivals } from "@/services/arrivals.service";
+import { getAlerts } from "@/services/alerts.service";
+import { getNearbyStops } from "@/services/stops.service";
 import AlertBanner from "@/components/alerts/AlertBanner";
 import { Hand, AlertTriangle, Info, Map } from "lucide-react";
 import ArrivalCard from "@/components/arrivals/ArrivalCard";
 import StopCard from "@/components/stops/StopCard";
 import Link from "next/link";
-import React from "react";
+import { Arrival, Stop, TransitAlert } from "@/types/transit";
 
 
 export default function HomePage() {
   const [temporaryDate, setDate] = React.useState(new Date("2026-01-01T00:00:00").toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }));
+  const [upcomingArrivals, setUpcomingArrivals] = React.useState<Arrival[]>([]);
+  const [alerts, setAlerts] = React.useState<TransitAlert[]>([]);
+  const [nearbyStops, setNearbyStops] = React.useState<Stop[]>([]);
 
-  // TODO: Replace with user's current location + real-time arrivals API
-  // GET /api/stops/nearby?lat=&lon=&radius=500
-  // GET /api/stops/:id/arrivals?limit=5
-  const upcomingArrivals = MOCK_ARRIVALS.slice(0, 4);
-  const activeAlerts = MOCK_ALERTS.filter((a) => a.status === "active");
-  const nearbyStops = MOCK_STOPS.slice(0, 3);
+  React.useEffect(() => {
+    (async () => {
+      const arr = await getUpcomingArrivals(4);
+      const al = await getAlerts();
+      const stops = await getNearbyStops();
+      setUpcomingArrivals(arr);
+      setAlerts(al);
+      setNearbyStops(stops.slice(0, 3));
+    })();
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Alert banner - always at the very top if there are active alerts */}
-      <AlertBanner alerts={activeAlerts} />
+      <AlertBanner alerts={alerts} />
 
       {/* Scrollable content */}
       <main className="flex-1 overflow-y-auto pb-24">
@@ -53,7 +63,7 @@ export default function HomePage() {
         </section>
 
         {/* Active alerts summary */}
-        {activeAlerts.length > 0 && (
+        {alerts.length > 0 && (
           <section className="px-4 mt-6" aria-labelledby="alerts-heading">
             <div className="flex items-center justify-between mb-3">
               <h2 id="alerts-heading" className="text-base font-bold text-slate-800 dark:text-slate-100">
@@ -67,7 +77,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="space-y-2.5">
-              {activeAlerts.slice(0, 2).map((alert) => (
+              {alerts.slice(0, 2).map((alert) => (
                 <div key={alert.id} className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden shadow-sm">
                   <div
                     className={`flex items-start gap-3 px-4 py-3.5 border-l-4 ${alert.severity === "critical"
@@ -110,12 +120,12 @@ export default function HomePage() {
                   </div>
                 </div>
               ))}
-              {activeAlerts.length > 2 && (
+              {alerts.length > 2 && (
                 <Link
                   href="/alerts"
                   className="block text-center py-3 text-sm font-medium text-blue-600 dark:text-blue-400"
                 >
-                  +{activeAlerts.length - 2} more alerts
+                  +{alerts.length - 2} more alerts
                 </Link>
               )}
             </div>

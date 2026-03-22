@@ -1,4 +1,4 @@
-import { MOCK_USER_PROFILE } from "@/data/mock";
+import { getUserProfile } from "@/services/profile.service";
 import ProfileClient from "@/components/profile/ProfileClient";
 
 export const metadata = {
@@ -6,7 +6,7 @@ export const metadata = {
   description: "Your transit preferences and saved routes",
 };
 
-export default function ProfilePage() {
-  const profile = MOCK_USER_PROFILE;
+export default async function ProfilePage() {
+  const profile = await getUserProfile();
   return <ProfileClient profile={profile} />;
 }

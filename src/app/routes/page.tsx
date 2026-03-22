@@ -1,14 +1,17 @@
 import TripPlanner from "@/components/trips/TripPlanner";
-import { MOCK_ROUTES, MOCK_STOPS } from "@/data/mock";
+import { getRoutes } from "@/services/routes.service";
+import { getAllStops } from "@/services/stops.service";
 import RouteChip from "@/components/ui/RouteChip";
 import StopCard from "@/components/stops/StopCard";
 
 export const metadata = {
-  title: "Routes – TransitPulse",
+  title: "Routes - TransitPulse",
   description: "Plan your trip and browse transit routes",
 };
 
-export default function RoutesPage() {
+export default async function RoutesPage() {
+  const routes = await getRoutes();
+  const stops = await getAllStops();
   return (
     <div className="flex flex-col min-h-screen">
       {/* Page header */}
@@ -31,7 +34,7 @@ export default function RoutesPage() {
             All Routes
           </h2>
           <div className="space-y-2.5">
-            {MOCK_ROUTES.map((route) => (
+            {routes.map((route) => (
               <div
                 key={route.id}
                 className="bg-white dark:bg-slate-800 rounded-2xl px-4 py-3.5 shadow-sm border border-slate-100 dark:border-slate-700 flex items-center gap-3"
@@ -59,7 +62,7 @@ export default function RoutesPage() {
           </h2>
           {/* TODO: Add map view (Mapbox / Google Maps) here */}
           <div className="space-y-2.5">
-            {MOCK_STOPS.map((stop) => (
+            {stops.map((stop) => (
               <StopCard key={stop.id} stop={stop} />
             ))}
           </div>

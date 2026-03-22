@@ -1,4 +1,4 @@
-import { MOCK_ALERTS } from "@/data/mock";
+import { getAlerts } from "@/services/alerts.service";
 import AlertCard from "@/components/alerts/AlertCard";
 import EmptyState from "@/components/ui/EmptyState";
 import { CheckCircle } from "lucide-react";
@@ -8,10 +8,11 @@ export const metadata = {
   description: "Service alerts and disruptions",
 };
 
-export default function AlertsPage() {
-  const activeAlerts = MOCK_ALERTS.filter((a) => a.status === "active");
-  const upcomingAlerts = MOCK_ALERTS.filter((a) => a.status === "upcoming");
-  const resolvedAlerts = MOCK_ALERTS.filter((a) => a.status === "resolved");
+export default async function AlertsPage() {
+  const all = await getAlerts();
+  const activeAlerts = all.filter((a) => a.status === "active");
+  const upcomingAlerts = all.filter((a) => a.status === "upcoming");
+  const resolvedAlerts = all.filter((a) => a.status === "resolved");
 
   return (
     <div className="flex flex-col min-h-screen">

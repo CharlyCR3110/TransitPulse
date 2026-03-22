@@ -2,20 +2,11 @@
 
 import { useState } from "react";
 import type { Trip } from "@/types/transit";
-import { MOCK_TRIPS } from "@/data/mock";
+import { planTrip } from "@/services/trips.service";
 import TripCard from "@/components/trips/TripCard";
 import EmptyState from "@/components/ui/EmptyState";
 
-// TODO: Replace with real trip search API call:
-//   GET /api/trips?origin=<id>&destination=<id>&departAt=<iso>
-function searchTrips(origin: string, destination: string): Trip[] {
-  if (!origin.trim() || !destination.trim()) return [];
-  return MOCK_TRIPS.filter(
-    (t) =>
-      t.origin.toLowerCase().includes(origin.toLowerCase()) ||
-      t.destination.toLowerCase().includes(destination.toLowerCase())
-  );
-}
+// Uses the trips service to plan trips (currently backed by mock data)
 
 export default function TripPlanner() {
   const [origin, setOrigin] = useState("");
@@ -24,7 +15,10 @@ export default function TripPlanner() {
 
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
-    setResults(searchTrips(origin, destination));
+    (async () => {
+      const res = await planTrip(origin, destination);
+      setResults(res);
+    })();
   }
 
   function handleSwap() {
@@ -48,7 +42,7 @@ export default function TripPlanner() {
             onChange={(e) => setOrigin(e.target.value)}
             placeholder="Current location or stop name"
             className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-base text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[48px]"
-            // TODO: Add autocomplete from stops API
+          // TODO: Add autocomplete from stops API
           />
         </div>
 
@@ -75,7 +69,7 @@ export default function TripPlanner() {
             onChange={(e) => setDestination(e.target.value)}
             placeholder="Destination stop or address"
             className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-base text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[48px]"
-            // TODO: Add autocomplete from stops API
+          // TODO: Add autocomplete from stops API
           />
         </div>
 
