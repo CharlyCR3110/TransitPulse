@@ -5,7 +5,6 @@
  */
 
 import type { ArrivalStatus, AlertSeverity, RouteType } from "@/types/transit";
-import type { ReactNode } from "react";
 
 // ─── Time formatting ─────────────────────────────────────────────────────────
 
