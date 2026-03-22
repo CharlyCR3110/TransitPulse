@@ -10,7 +10,7 @@ import React from "react";
 
 
 export default function HomePage() {
-  const [temporaryDate, setDate] = React.useState(new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }));
+  const [temporaryDate, setDate] = React.useState(new Date("2026-01-01T00:00:00").toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }));
 
   // TODO: Replace with user's current location + real-time arrivals API
   // GET /api/stops/nearby?lat=&lon=&radius=500
