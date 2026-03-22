@@ -18,6 +18,27 @@ type LocaleStrings = Record<string, unknown>;
  */
 let currentLocale: Locale = "en";
 
+const STORAGE_KEY = "transitpulse_locale";
+
+function isValidLocale(l: string): l is Locale {
+  return Object.prototype.hasOwnProperty.call(locales, l);
+}
+
+// Initialize locale from persisted storage or browser preference (client-only).
+if (typeof window !== "undefined") {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && isValidLocale(saved)) {
+      currentLocale = saved;
+    } else {
+      const nav = (navigator.language || "").split("-")[0];
+      if (isValidLocale(nav)) currentLocale = nav;
+    }
+  } catch (e) {
+    // ignore storage errors
+  }
+}
+
 /**
  * Subscribers notified whenever the locale changes.
  */
@@ -43,6 +64,14 @@ export function setLocale(locale: Locale): void {
   if (currentLocale === locale) return;
 
   currentLocale = locale;
+
+  if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(STORAGE_KEY, locale);
+    } catch (e) {
+      // ignore
+    }
+  }
 
   for (const subscriber of subscribers) {
     subscriber(currentLocale);

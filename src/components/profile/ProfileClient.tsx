@@ -4,8 +4,9 @@ import React from "react";
 import type { UserProfile } from "@/types/transit";
 import RouteChip from "@/components/ui/RouteChip";
 import StopCard from "@/components/stops/StopCard";
-import { Bus, User, Lock, Accessibility, Bell } from "lucide-react";
+import { Bus, User, Lock, Accessibility, Bell, Globe } from "lucide-react";
 import { useT } from "@/lib/i18n-client";
+import LanguageSwitcher from "@/components/profile/LanguageSwitcher";
 
 export default function ProfileClient({ profile }: { profile: UserProfile }) {
   const t = useT();
@@ -113,6 +114,11 @@ export default function ProfileClient({ profile }: { profile: UserProfile }) {
               value={profile.notificationsEnabled ? t("profile.on") : t("profile.off")}
               icon={<Bell size={18} />}
             />
+            <div className="flex items-center gap-3 px-4 py-3.5 min-h-[52px]">
+              <span className="text-lg flex-shrink-0" aria-hidden="true"><Globe size={18} /></span>
+              <p className="flex-1 text-sm text-slate-700 dark:text-slate-300">{t("profile.language")}</p>
+              <LanguageSwitcher />
+            </div>
           </div>
         </section>
 

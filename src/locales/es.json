@@ -49,6 +49,7 @@
     },
     "accessible": "Accesible",
     "stopPrefix": "Parada #",
+    "all": "Todas las paradas",
     "stops": {
       "accessible": "Accesible",
       "stopPrefix": "Parada #",
@@ -98,6 +99,7 @@
   "trips": {
     "planner": {
       "title": "Planificador de viajes",
+      "subtitle": "Encuentra tu ruta más rápida",
       "from": "Desde",
       "to": "Hasta",
       "plan": "Planificar viaje",
@@ -124,6 +126,7 @@
     "favoriteStops": "Paradas favoritas",
     "favoriteRoutes": "Rutas favoritas",
     "preferences": "Preferencias",
+    "language": "Idioma",
     "noFavorites": "Aún no hay favoritos.",
     "on": "Activado",
     "off": "Desactivado",
@@ -132,6 +135,9 @@
       "preferredModes": "Modos preferidos",
       "notifications": "Notificaciones"
     }
+  },
+  "routes": {
+    "all": "Todas las rutas"
   },
   "ui": {
     "emptyState": "No hay elementos para mostrar",

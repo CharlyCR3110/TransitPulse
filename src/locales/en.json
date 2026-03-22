@@ -59,11 +59,16 @@
       "nearby": "Nearby stops"
     },
     "accessible": "Accessible",
-    "stopPrefix": "Stop #"
+    "stopPrefix": "Stop #",
+    "all": "All Stops"
+  },
+  "routes": {
+    "all": "All Routes"
   },
   "trips": {
     "planner": {
       "title": "Trip Planner",
+      "subtitle": "Find your fastest route",
       "from": "From",
       "to": "To",
       "plan": "Plan trip",
@@ -90,6 +95,7 @@
     "favoriteStops": "Favorite Stops",
     "favoriteRoutes": "Favorite Routes",
     "preferences": "Preferences",
+    "language": "Language",
     "noFavorites": "No favorites yet.",
     "on": "On",
     "off": "Off",
