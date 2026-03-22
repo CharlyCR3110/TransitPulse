@@ -5,6 +5,7 @@
  */
 
 import type { ArrivalStatus, AlertSeverity, RouteType } from "@/types/transit";
+import type { ReactNode } from "react";
 
 // ─── Time formatting ─────────────────────────────────────────────────────────
 
@@ -123,20 +124,20 @@ export function routeTypeLabel(type: RouteType): string {
   }
 }
 
-/** Returns an emoji icon for a route type (used where SVG icons aren't available). */
+/** Returns a short identifier for a route type icon. */
 export function routeTypeIcon(type: RouteType): string {
   switch (type) {
     case "bus":
-      return "🚌";
+      return "bus";
     case "subway":
-      return "🚇";
+      return "subway";
     case "tram":
-      return "🚊";
+      return "tram";
     case "rail":
-      return "🚆";
+      return "rail";
     case "ferry":
-      return "⛴️";
+      return "ferry";
     default:
-      return "🚏";
+      return "default";
   }
 }

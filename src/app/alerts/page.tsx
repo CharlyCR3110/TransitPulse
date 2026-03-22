@@ -1,9 +1,12 @@
+"use client";
+
 import { MOCK_ALERTS } from "@/data/mock";
 import AlertCard from "@/components/alerts/AlertCard";
 import EmptyState from "@/components/ui/EmptyState";
+import { CheckCircle } from "lucide-react";
 
 export const metadata = {
-  title: "Alerts – TransitPulse",
+  title: "Alerts - TransitPulse",
   description: "Service alerts and disruptions",
 };
 
@@ -37,7 +40,7 @@ export default function AlertsPage() {
           </h2>
           {activeAlerts.length === 0 ? (
             <EmptyState
-              icon="✅"
+              icon={<CheckCircle size={36} className="text-green-600" />}
               title="No active alerts"
               description="All services are running normally."
             />
@@ -81,7 +84,7 @@ export default function AlertsPage() {
         {/* Notification opt-in placeholder */}
         <div className="px-4 mt-8">
           <div className="bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 rounded-2xl px-4 py-4">
-            <p className="text-sm font-semibold text-blue-800 dark:text-blue-200">🔔 Stay updated</p>
+            <p className="text-sm font-semibold text-blue-800 dark:text-blue-200 flex items-center gap-2"><span aria-hidden="true"><svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg></span>Stay updated</p>
             <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
               Get push notifications for your saved routes.
               {/* TODO: Wire up to notification permission API + user preferences */}

@@ -1,5 +1,7 @@
+"use client";
 import type { Stop } from "@/types/transit";
 import RouteChip from "@/components/ui/RouteChip";
+import { Accessibility } from "lucide-react";
 import { formatDistance } from "@/lib/utils";
 import Link from "next/link";
 
@@ -23,7 +25,7 @@ export default function StopCard({ stop }: StopCardProps) {
             </span>
             {stop.accessible && (
               <span className="text-sm" aria-label="Wheelchair accessible" title="Accessible">
-                ♿
+                <Accessibility className="h-4 w-4 inline" />
               </span>
             )}
           </div>

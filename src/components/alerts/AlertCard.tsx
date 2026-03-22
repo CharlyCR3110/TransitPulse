@@ -1,16 +1,14 @@
+"use client";
+
 import type { TransitAlert } from "@/types/transit";
 import { alertSeverityClasses, formatTime, formatRelativeDay } from "@/lib/utils";
+import { AlertTriangle, Info } from "lucide-react";
 
 interface AlertCardProps {
   alert: TransitAlert;
   compact?: boolean;
 }
 
-const SEVERITY_ICON: Record<string, string> = {
-  critical: "🚨",
-  warning: "⚠️",
-  info: "ℹ️",
-};
 
 export default function AlertCard({ alert, compact = false }: AlertCardProps) {
   const classes = alertSeverityClasses(alert.severity);
@@ -23,8 +21,14 @@ export default function AlertCard({ alert, compact = false }: AlertCardProps) {
     >
       {/* Header row */}
       <div className="flex items-start gap-2">
-        <span className="text-lg flex-shrink-0 mt-0.5" aria-hidden="true">
-          {SEVERITY_ICON[alert.severity]}
+        <span className={`text-lg flex-shrink-0 mt-0.5 ${classes.icon}`} aria-hidden="true">
+          {alert.severity === "critical" ? (
+            <AlertTriangle size={18} />
+          ) : alert.severity === "warning" ? (
+            <AlertTriangle size={18} />
+          ) : (
+            <Info size={18} />
+          )}
         </span>
         <div className="flex-1 min-w-0">
           <p className={`text-sm font-bold leading-tight ${classes.text}`}>{alert.title}</p>
@@ -56,7 +60,7 @@ export default function AlertCard({ alert, compact = false }: AlertCardProps) {
       {/* Time range */}
       <p className={`text-xs mt-2 opacity-70 ${classes.text}`}>
         {formatRelativeDay(alert.startTime)} · {formatTime(alert.startTime)}
-        {alert.endTime && ` – ${formatTime(alert.endTime)}`}
+        {alert.endTime && ` - ${formatTime(alert.endTime)}`}
       </p>
     </div>
   );
@@ -66,11 +70,10 @@ function StatusPill({ status }: { status: TransitAlert["status"] }) {
   if (status === "resolved") return null;
   return (
     <span
-      className={`flex-shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-        status === "active"
-          ? "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300"
-          : "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
-      }`}
+      className={`flex-shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${status === "active"
+        ? "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300"
+        : "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
+        }`}
     >
       {status === "active" ? "Active" : "Upcoming"}
     </span>

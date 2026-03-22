@@ -1,10 +1,17 @@
+"use client";
+
 import { MOCK_ARRIVALS, MOCK_ALERTS, MOCK_STOPS } from "@/data/mock";
 import AlertBanner from "@/components/alerts/AlertBanner";
+import { Hand, AlertTriangle, Info, Map } from "lucide-react";
 import ArrivalCard from "@/components/arrivals/ArrivalCard";
 import StopCard from "@/components/stops/StopCard";
 import Link from "next/link";
+import React from "react";
+
 
 export default function HomePage() {
+  const [temporaryDate, setDate] = React.useState(new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }));
+
   // TODO: Replace with user's current location + real-time arrivals API
   // GET /api/stops/nearby?lat=&lon=&radius=500
   // GET /api/stops/:id/arrivals?limit=5
@@ -21,11 +28,12 @@ export default function HomePage() {
       <main className="flex-1 overflow-y-auto pb-24">
         {/* Greeting */}
         <section className="px-4 pt-5 pb-2">
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Good ride! 👋
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            Good ride!
+            <Hand className="h-6 w-6" />
           </h1>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-            Central Station · {new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}
+            Central Station · {temporaryDate}
           </p>
         </section>
 
@@ -63,14 +71,20 @@ export default function HomePage() {
                 <div key={alert.id} className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden shadow-sm">
                   <div
                     className={`flex items-start gap-3 px-4 py-3.5 border-l-4 ${alert.severity === "critical"
-                        ? "border-red-500 bg-red-50 dark:bg-red-950/30"
-                        : alert.severity === "warning"
-                          ? "border-amber-500 bg-amber-50 dark:bg-amber-950/30"
-                          : "border-blue-400 bg-blue-50 dark:bg-blue-950/30"
+                      ? "border-red-500 bg-red-50 dark:bg-red-950/30"
+                      : alert.severity === "warning"
+                        ? "border-amber-500 bg-amber-50 dark:bg-amber-950/30"
+                        : "border-blue-400 bg-blue-50 dark:bg-blue-950/30"
                       }`}
                   >
                     <span className="text-lg flex-shrink-0 mt-0.5">
-                      {alert.severity === "critical" ? "🚨" : alert.severity === "warning" ? "⚠️" : "ℹ️"}
+                      {alert.severity === "critical" ? (
+                        <AlertTriangle size={18} />
+                      ) : alert.severity === "warning" ? (
+                        <AlertTriangle size={18} />
+                      ) : (
+                        <Info size={18} />
+                      )}
                     </span>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-slate-900 dark:text-white leading-tight">
@@ -139,7 +153,7 @@ export default function HomePage() {
               <p className="font-bold text-base leading-tight">Plan a Trip</p>
               <p className="text-sm text-blue-100 mt-0.5">Find the best route →</p>
             </div>
-            <span className="text-3xl" aria-hidden="true">🗺️</span>
+            <span className="text-3xl" aria-hidden="true"><Map className="h-8 w-8" /></span>
           </Link>
         </section>
       </main>

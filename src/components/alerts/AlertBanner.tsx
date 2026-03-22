@@ -1,5 +1,8 @@
+"use client";
+
 import type { TransitAlert } from "@/types/transit";
 import Link from "next/link";
+import { AlertTriangle, Info } from "lucide-react";
 
 interface AlertBannerProps {
   alerts: TransitAlert[];
@@ -13,11 +16,11 @@ export default function AlertBanner({ alerts }: AlertBannerProps) {
   const hasCritical = active.some((a) => a.severity === "critical");
   const hasWarning = active.some((a) => a.severity === "warning");
 
-  const { bg, text, icon } = hasCritical
-    ? { bg: "bg-red-600", text: "text-white", icon: "🚨" }
+  const { bg, text } = hasCritical
+    ? { bg: "bg-red-600", text: "text-white" }
     : hasWarning
-    ? { bg: "bg-amber-500", text: "text-white", icon: "⚠️" }
-    : { bg: "bg-blue-600", text: "text-white", icon: "ℹ️" };
+      ? { bg: "bg-amber-500", text: "text-white" }
+      : { bg: "bg-blue-600", text: "text-white" };
 
   const first = active[0];
 
@@ -27,7 +30,9 @@ export default function AlertBanner({ alerts }: AlertBannerProps) {
       className={`flex items-center gap-2.5 px-4 py-3 ${bg} ${text} active:opacity-80`}
       aria-label={`${active.length} active alert${active.length > 1 ? "s" : ""}. Tap to view.`}
     >
-      <span className="text-lg flex-shrink-0" aria-hidden="true">{icon}</span>
+      <span className={`text-lg flex-shrink-0 ${hasCritical ? "text-red-100" : hasWarning ? "text-amber-100" : "text-blue-100"}`} aria-hidden="true">
+        {hasCritical ? <AlertTriangle size={18} /> : hasWarning ? <AlertTriangle size={18} /> : <Info size={18} />}
+      </span>
       <p className="flex-1 text-sm font-medium leading-snug truncate">{first.title}</p>
       {active.length > 1 && (
         <span className="flex-shrink-0 bg-white/20 rounded-full text-xs font-bold px-2 py-0.5">
