@@ -36,7 +36,7 @@ export default function AlertsPage() {
           <h2 id="active-alerts-heading" className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3">
             Active Now · {activeAlerts.length}
           </h2>
-          {true ? (
+          {activeAlerts.length === 0 ? (
             <EmptyState
               icon="check"
               title="No active alerts"
