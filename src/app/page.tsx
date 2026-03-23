@@ -14,7 +14,8 @@ import { useT } from "@/lib/i18n-client";
 
 export default function HomePage() {
   const t = useT();
-  const [temporaryDate, setDate] = React.useState(new Date("2026-01-01T00:00:00").toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }));
+  const [temporaryDate, setDate] = React.useState("");
+
   const [upcomingArrivals, setUpcomingArrivals] = React.useState<Arrival[]>([]);
   const [alerts, setAlerts] = React.useState<TransitAlert[]>([]);
   const [nearbyStops, setNearbyStops] = React.useState<Stop[]>([]);
@@ -22,6 +23,16 @@ export default function HomePage() {
   const refreshArrivals = React.useCallback(async () => {
     const arr = await getUpcomingArrivals(4);
     setUpcomingArrivals(arr);
+  }, []);
+
+  React.useEffect(() => {
+    setDate(
+      new Date("2026-01-01T00:00:00").toLocaleTimeString("es-CR", {
+        hour: "numeric",
+        minute: "2-digit",
+        timeZone: "America/Costa_Rica",
+      })
+    );
   }, []);
 
   React.useEffect(() => {
